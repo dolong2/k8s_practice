@@ -19,7 +19,7 @@ spec:
         - containerPort: 3306
         envFrom:
         - configMapRef:
-            name: env-config-map
+            name: mysql-env-config
       - name: redis-container
         image: redis:latest
         ports:
