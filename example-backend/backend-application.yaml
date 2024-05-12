@@ -26,6 +26,9 @@ spec:
         - containerPort: 6379
       - name: spring-container
         image: dolong2/simple-spring-crud:0.0.1
+        envFrom:
+        - configMapRef:
+            name: spring-env-config
         ports:
         - containerPort: 8080
 ---
