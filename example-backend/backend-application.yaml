@@ -25,7 +25,7 @@ spec:
         ports:
         - containerPort: 6379
       - name: spring-container
-        image: dolong2/testapplication:latest
+        image: dolong2/simple-spring-crud:0.0.1
         ports:
         - containerPort: 8080
 ---
