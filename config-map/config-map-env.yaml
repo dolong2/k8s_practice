@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-map-env-deployment
+  namespace: config-map
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-map-env-deployment
+  template:
+    metadata:
+      labels:
+        app: config-map-env-deployment
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: test-config-map
