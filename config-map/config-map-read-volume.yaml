@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-map-read-volume-deployment
+  namespace: config-map
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-map-read-volume-deployment
+  template:
+    metadata:
+      labels:
+        app: config-map-read-volume-deployment
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+      # 이 부분에서 config map을 토대로 읽기 전용 볼륨 생성
+      volumes:
+      - name: config-volume
+        configMap:
+          name: test-config-map
