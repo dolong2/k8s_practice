@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configmap-reader-deployment
+  namespace: config-map
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: configmap-reader
+  template:
+    metadata:
+      labels:
+        app: configmap-reader
+    spec:
+      containers:
+      - name: configmap-reader
+        image: python:3.9
+        command: ["pip", "install", "kubernetes", "&&", "python", "-u", "/app/read_configmap.py"]
+        volumeMounts:
+        - name: configmap-script
+          mountPath: /app
+      volumes:
+      - name: configmap-script
+        configMap:
+          name: configmap-script
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-script
+  namespace: config-map
+data:
+  # 애플리케이션에서 이런식으로 쿠버네티스 API를 통해서 가져오기 가능
+  read_configmap.py: |
+    import os
+    from kubernetes import client, config
+
+    def main():
+        config.load_incluster_config()
+        v1 = client.CoreV1Api()
+        config_map = v1.read_namespaced_config_map("test-config-map", "config-map")
+        print("ConfigMap data:", config_map.data)
+
+    if __name__ == '__main__':
+        main()
