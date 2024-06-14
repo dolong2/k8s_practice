@@ -16,7 +16,11 @@ spec:
       containers:
       - name: configmap-reader
         image: python:3.9
-        command: ["pip", "install", "kubernetes", "&&", "python", "-u", "/app/read_configmap.py"]
+        command: ["/bin/sh"]
+        args:
+        - "-c"
+        - |
+          pip install kubernetes && python /app/read_configmap.py
         volumeMounts:
         - name: configmap-script
           mountPath: /app
