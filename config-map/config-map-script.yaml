@@ -41,14 +41,10 @@ data:
     import os
     from kubernetes import client, config
 
-    def main():
-        config.load_incluster_config()
-        v1 = client.CoreV1Api()
-        config_map = v1.read_namespaced_config_map("test-config-map", "config-map")
-        print("ConfigMap data:", config_map.data)
-
-    if __name__ == '__main__':
-        main()
+    config.load_incluster_config()
+    v1 = client.CoreV1Api()
+    config_map = v1.read_namespaced_config_map("test-config-map", "config-map")
+    print("ConfigMap data:", config_map.data)
 ---
 apiVersion: v1
 kind: ServiceAccount
