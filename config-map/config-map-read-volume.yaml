@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: config-map-read-volume-deployment
+  name: configmap-read-volume-deployment
   namespace: config-map
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: config-map-read-volume-deployment
+      app: configmap-read-volume-deployment
   template:
     metadata:
       labels:
-        app: config-map-read-volume-deployment
+        app: configmap-read-volume-deployment
     spec:
       containers:
       - name: nginx-container

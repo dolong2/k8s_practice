@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: config-map-env-deployment
+  name: configmap-env-deployment
   namespace: config-map
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: config-map-env-deployment
+      app: configmap-env-deployment
   template:
     metadata:
       labels:
-        app: config-map-env-deployment
+        app: configmap-env-deployment
     spec:
       containers:
       - name: nginx-container
