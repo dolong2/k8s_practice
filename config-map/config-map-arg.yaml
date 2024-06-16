@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configmap-arg-deployment
+  namespace: config-map
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: configmap-arg
+  template:
+    metadata:
+      labels:
+        app: configmap-arg
+    spec:
+      containers:
+      - name: example-container
+        image: busybox
+        command: [ "sh", "-c", "echo $(ARGUMENT)" ]
+        env:
+        - name: ARGUMENT
+          valueFrom:
+            configMapKeyRef:
+              name: test-config-map
+              key: TEST
