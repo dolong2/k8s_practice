@@ -7,11 +7,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: deployment-practice
+      app: test-deployment
   template:
     metadata:
       labels:
-        app: deployment-practice
+        app: test-deployment
     spec:
       containers:
       - name: nginx-container
