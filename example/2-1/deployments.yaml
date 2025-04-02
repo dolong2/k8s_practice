@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: lab-numbers-api
+  namespace: example-2-1
 spec:
   selector:
     matchLabels:
@@ -21,6 +22,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: lab-numbers-web
+  namespace: example-2-1
 spec:
   selector:
     matchLabels:
@@ -40,6 +42,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: lab-numbers-web-v2
+  namespace: example-2-1
 spec:
   selector:
     matchLabels:
