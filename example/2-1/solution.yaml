@@ -10,3 +10,17 @@ spec:
   ports:
     - port: 80
   type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: numbers-web
+  namespace: example-2-1
+spec:
+  selector:
+    app: lab-numbers-web
+    version: v2
+  ports:
+    - port: 8088
+      targetPort: 80
+  type: LoadBalancer
