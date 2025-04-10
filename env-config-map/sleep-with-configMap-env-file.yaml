@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sleep
+  namespace: env-or-configmap
+spec:
+  selector:
+    matchLabels:
+      app: sleep
+  template:
+    metadata:
+      labels:
+        app: sleep
+    spec:
+      containers:
+        - name: sleep
+          image: kiamol/ch03-sleep
+          env:
+          - name: KIAMOL_CHAPTER
+            value: "04"
+          - name: KIAMOL_SECTION
+            valueFrom:
+              configMapKeyRef:
+                name: sleep-config-literal
+                key: kiamol.section
+          envFrom:
+          - configMapRef:
+              name: sleep-config-env-file
+# 아래의 명령을 통해서 env 파일 기반의 컨피그맵 생성
+# kubectl create configmap sleep-config-env-file -n env-or-configmap --from-env-file=ch04.env
