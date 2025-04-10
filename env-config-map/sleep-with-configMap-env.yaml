@@ -24,4 +24,4 @@ spec:
                 name: sleep-config-literal
                 key: kiamol.section
 # 아래의 명령을 통해서 configMap 생성
-# kubectl create configmap sleep-config-literal --from-literal=kiamol.section='4.1' 
+# kubectl create configmap sleep-config-literal -n env-or-configmap --from-literal=kiamol.section='4.1' 
