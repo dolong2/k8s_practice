@@ -7,6 +7,6 @@ data:
   config.json: |-
     {
       "ConfigController": {
-        "Enable": true
+        "Enabled": true
       }
     }
