@@ -18,3 +18,16 @@ spec:
           env:
           - name: Logging_LogLevel_Default
             value: Warning
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-web
+  namespace: env-or-configmap
+spec:
+  ports:
+    - port: 8080
+      targetPort: 80
+  selector:
+    app: todo-web
+  type: LoadBalancer
