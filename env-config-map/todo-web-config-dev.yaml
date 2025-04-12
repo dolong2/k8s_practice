@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-web-config-dev
+  namespace: env-or-configmap
+data:
+  config.json: |-
+    {
+      "ConfigController": {
+        "Enable": true
+      }
+    }
