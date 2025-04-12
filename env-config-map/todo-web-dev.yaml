@@ -15,11 +15,11 @@ spec:
       containers:
         - name: web
           image: kiamol/ch04-todo-list 
-          volumeMounts:
-            - name: config
-              mountPath: "/app/config"
-              readOnly: true
-      volumes:
-        - name: config
+          volumeMounts: # 컨테이너에 볼륨을 마운트한다.
+            - name: config # 마운트할 볼륨 이름 -> 아래에 정의된 볼륨의 이름과 같아야함
+              mountPath: "/app/config" # 볼륨이 마운트될 경로
+              readOnly: true # 볼륨을 읽기전용으로 마운트
+      volumes: # 볼륨은 파드 수준에서 정의
+        - name: config # 볼륨의 이름
           configMap:
-            name: todo-web-config-dev
+            name: todo-web-config-dev # 내용을 읽어 올 컨피그맵 이름
