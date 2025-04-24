@@ -15,17 +15,17 @@ spec:
         - name: db
           image: postgres:11.6-alpine
           env:
-          - name: POSTGRES_PASSWORD_FILE
+          - name: POSTGRES_PASSWORD_FILE # 설정 파일이 마운트 될 경로
             value: /secrets/postgres_password
-          volumeMounts:
-            - name: secret
+          volumeMounts: # 볼륨 마운트 설정
+            - name: secret # 마운트할 볼륨 이름
               mountPath: "/secrets"
       volumes:
         - name: secret
-          secret:
-            secretName: todo-db-secret-test
-            defaultMode: 0400
-            items:
+          secret: # 비밀값에서 볼륨 생성
+            secretName: todo-db-secret-test # 볼륨으로 만들 비밀값 이름
+            defaultMode: 0400 # 파일의 권한 설정
+            items: # 비밀값의 특정 데이터 항목을 지정 가능
             - key: POSTGRES_PASSWORD
               path: postgres_password
 ---
