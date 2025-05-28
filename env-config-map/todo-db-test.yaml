@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: todo-db
+  namespace: env-or-configmap
 spec:
   selector:
     matchLabels:
