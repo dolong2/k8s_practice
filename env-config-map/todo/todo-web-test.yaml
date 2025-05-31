@@ -16,13 +16,19 @@ spec:
         - name: web
           image: kiamol/ch04-todo-list
           volumeMounts:
+            - name: config
+              mountPath: "/app/config"
+              readOnly: true
             - name: secret
               mountPath: /app/secrets
               readOnly: true
       volumes:
         - name: config # 볼륨의 이름
           configMap:
-            name: todo-web-config-dev # 내용을 읽어 올 컨피그맵 이름
+            name: todo-web-config-test
+            items:
+            - key: config.json
+              path: config.json
         - name: secret
           secret: # 비밀값에서 볼륨 생성
             secretName: todo-web-secret-test # 볼륨으로 만들 비밀값 이름
