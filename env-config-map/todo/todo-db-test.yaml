@@ -21,6 +21,7 @@ spec:
           volumeMounts: # 볼륨 마운트 설정
             - name: secret # 마운트할 볼륨 이름
               mountPath: "/secrets"
+              readOnly: true
       volumes:
         - name: secret
           secret: # 비밀값에서 볼륨 생성
