@@ -30,3 +30,16 @@ spec:
             items: # 비밀값의 특정 데이터 항목을 지정 가능
             - key: secrets.json
               path: secrets.json
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-web
+  namespace: env-or-configmap
+spec:
+  ports:
+    - port: 8080
+      targetPort: 80
+  selector:
+    app: todo-web
+  type: LoadBalancer
