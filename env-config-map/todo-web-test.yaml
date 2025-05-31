@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-web-test
+  namespace: env-or-configmap
+spec:
+  selector:
+    matchLabels:
+      app: todo-web
+  template:
+    metadata:
+      labels:
+        app: todo-web
+    spec:
+      containers:
+        - name: web
+          image: kiamol/ch04-todo-list
+          volumeMounts:
+            - name: secret
+              mountPath: /app/secrets
+              readOnly: true
+      volumes:
+        - name: config # 볼륨의 이름
+          configMap:
+            name: todo-web-config-dev # 내용을 읽어 올 컨피그맵 이름
+        - name: secret
+          secret: # 비밀값에서 볼륨 생성
+            secretName: todo-web-secret-test # 볼륨으로 만들 비밀값 이름
+            defaultMode: 0400 # 파일의 권한 설정
+            items: # 비밀값의 특정 데이터 항목을 지정 가능
+            - key: secrets.json
+              path: secrets.json
