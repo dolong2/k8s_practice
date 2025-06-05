@@ -16,8 +16,8 @@ spec:
         - name: sleep
           image: kiamol/ch03-sleep
           volumeMounts:
-            - name: data
-              mountPath: /data
+            - name: data # 볼륨 이름이 data인 볼륨을 마운트
+              mountPath: /data # 볼륨을 마운트할 경로 지정
       volumes:
-        - name: data
-          emptyDir: {}
+        - name: data # 볼륨의 이름 정의
+          emptyDir: {} # 볼륨 유형 정의 EmptyDir
