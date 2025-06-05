@@ -21,3 +21,11 @@ spec:
       volumes:
         - name: data # 볼륨의 이름 정의
           emptyDir: {} # 볼륨 유형 정의 EmptyDir
+# 볼륨에 파일 생성
+# kubectl exec -n volume-mount-claim deploy/sleep -- sh -c 'echo ch05 > /data/file.txt; ls /data/*.txt'
+# 파드의 컨테이너 아이디 확인
+# kubectl get pod -n volume-mount-claim -l app=sleep -o jsonpath='{.items[0].status.containerStatuses[0].containerID}'
+# 컨테이너의 프로세스 종료
+# kubectl exec -n volume-mount-claim -it deploy/sleep -- killall5
+# 마운트된 디렉토리에 데이터가 유지되는지 확인
+# kubectl exec -n volume-mount-claim deploy/sleep -- sh -c 'ls /data'
