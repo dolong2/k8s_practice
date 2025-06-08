@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv01 # 볼륨 이름
+  namespace: volume-mount-claim
+spec:
+  capacity:
+    storage: 50Mi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: nfs.my.network
+    path: "/kubernetes-volumes"
