@@ -18,3 +18,5 @@ spec:
               operator: In # 안에
               values:
                 - volume-mount-claim # 해당 값이 존재하는 노드에서 사용가능
+# 아래의 명령을 통해 노드에 레이블을 부여하고 적용
+# kubectl label node $(kubectl get nodes -o jsonpath='{.items[0].metadata.name}') dolong2=volume-mount-claim
