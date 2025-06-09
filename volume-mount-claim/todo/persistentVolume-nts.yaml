@@ -5,9 +5,9 @@ metadata:
   namespace: volume-mount-claim
 spec:
   capacity:
-    storage: 50Mi
+    storage: 50Mi # 볼륨 용량
   accessModes:
-    - ReadWriteOnce
-  nfs:
-    server: nfs.my.network
-    path: "/kubernetes-volumes"
+    - ReadWriteOnce # 하나의 파드에서만 접근 가능
+  nfs: # nfs 사용
+    server: nfs.my.network # NFS 서버의 도메인 네임
+    path: "/kubernetes-volumes" # 볼륨으로 사용할 NFS 서버의 경로
