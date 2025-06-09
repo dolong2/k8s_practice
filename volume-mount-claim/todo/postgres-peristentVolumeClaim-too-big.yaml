@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc-toobig
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi # 해당 스토리지 용량을 제공할 수 있는 PV가 없어서 대기 상태로 유지됨
+  storageClassName: ""
