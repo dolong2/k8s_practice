@@ -39,3 +39,16 @@ spec:
             items:
               - key: secrets.json
                 path: secrets.json
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-web
+  namespace: volume-mount-claim
+spec:
+  ports:
+    - port: 8081
+      targetPort: 80
+  selector:
+    app: todo-web
+  type: LoadBalancer
