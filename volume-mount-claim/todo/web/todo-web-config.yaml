@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-web-config
+  namespace: volume-mount-claim
+data:
+  config.json: |-
+    {
+      "ConfigController": {
+        "Enabled" : true
+      },
+      "Database" : {
+        "Provider" : "Postgres"
+      }
+    }
