@@ -9,3 +9,35 @@ spec:
   resources:
     requests:
       storage: 100Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-web-lab
+  namespace: volume-mount-claim-test
+spec:
+  selector:
+    matchLabels:
+      app: todo-web-lab
+  template:
+    metadata:
+      labels:
+        app: todo-web-lab
+    spec:
+      containers:
+        - name: web
+          image: kiamol/ch04-todo-list
+          env:
+            - name: Database__Provider
+              value: Sqlite
+            - name: ConnectionStrings__ToDoDb
+              value: "Filename=/data/todo-list-lab.db"
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Test
+          volumeMounts:
+            - name: todo-web-data
+              mountPath: /data
+      volumes:
+        - name: todo-web-data
+          persistentVolumeClaim:
+            claimName: todo-web-pvc
