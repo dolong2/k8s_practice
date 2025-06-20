@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: whoami-web
+  namespace: scaling
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: whoami-web # 관리 대상 파드를 찾기위한 셀렉터
+  template: # 일반적인 파드 정의 작성
+    metadata:
+      labels:
+        app: whoami-web
+    spec:
+      containers:
+        - image: kiamol/ch02-whoami
+          name: web
+          ports:
+            - containerPort: 80
+              name: http
