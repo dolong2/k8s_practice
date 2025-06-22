@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: pi-web
-  template:
+  template: # 이 아래로 파드의 정의 작성
     metadata:
       labels:
         app: pi-web
