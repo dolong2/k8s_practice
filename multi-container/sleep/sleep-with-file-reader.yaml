@@ -14,18 +14,18 @@ spec:
       labels:
         app: sleep
     spec:
-      containers:
+      containers: # 컨테이너 필드의 형태는 배열
         - name: sleep
           image: kiamol/ch03-sleep
           volumeMounts:
             - name: data
               mountPath: /data-rw
         - name: file-reader
-          image: kimol/ch03-sleep
+          image: kimol/ch03-sleep # 여러 컨테이너를 정의할때 같은 이미지를 사용해도 됨
           volumeMounts:
             - name: data
               mountPath: /data-ro
               readOnly: true
       volumes:
-        - name: data
+        - name: data # 같은 볼륨은 여러 컨테이너에 마운트할 수 있다
           emptyDir: {}
