@@ -25,3 +25,4 @@ spec:
               name: http
 # 아래의 명령을 통해 통신확인 가능
 # kubectl exec deploy/sleep -c sleep -n multi-container -- wget -q -O - localhost:8080
+# kubectl logs -l app=sleep -c server -n multi-container
