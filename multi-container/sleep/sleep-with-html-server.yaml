@@ -14,8 +14,8 @@ spec:
       labels:
         app: sleep
     spec:
-      initContainers:
-        - name: init-html
+      initContainers: # 초기화 컨테이너 필드의 형태도 배열
+        - name: init-html # 정의된 순서대로 실행됨
           image: kiamol/ch03-sleep
           command:
             - sh
