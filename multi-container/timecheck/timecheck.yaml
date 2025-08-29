@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timecheck
+  namespace: multi-container
+  labels:
+    kiamol: ch07
+spec:
+  selector:
+    matchLabels:
+      app: timecheck
+  template:
+    metadata:
+      labels:
+        app: timecheck
+    spec:
+      containers:
+        - name: timecheck
+          image: kiamol/ch07-timecheck
