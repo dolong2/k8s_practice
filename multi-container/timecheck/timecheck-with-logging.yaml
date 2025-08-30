@@ -34,14 +34,14 @@ spec:
             - name: config-dir
               mountPath: /config
               readOnly: true
-            - name: logs-dir
+            - name: logs-dir # 마운트된 볼륨에 로그 파일 생성
               mountPath: /logs
         - name: logger
           image: kiamol/ch03-sleep
           command:
             - sh
             - -c
-            - tail -f /logs-ro/timecheck.log
+            - tail -f /logs-ro/timecheck.log # tail 명령으로 마운트된 볼륨의 로그 파일의 내용을 출력하므로, logger 컨테이너의 로그 조회시 기록된 타임스탬프 확인 가능
           volumeMounts:
             - name: logs-dir
               mountPath: /logs-ro
