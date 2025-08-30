@@ -54,3 +54,5 @@ spec:
           emptyDir: {}
         - name: logs-dir
           emptyDir: {}
+# logger 컨테이너를 통해 timecheck 컨테이너의 로그를 확인할 수 있음
+# kubectl logs -l app=timecheck -c logger -n multi-container
