@@ -18,16 +18,16 @@ spec:
         - name: web
           image: kiamol/ch03-numbers-web
           env:
-            - name: http_proxy
+            - name: http_proxy # 프록시를 통해서 앰배서더 컨테이너로 전달
               value: http://localhost:1080
             - name: RngApi__Url
-              value: http://localhost/api
+              value: http://localhost/api # API에 접근하기 위한 호출할 주소
         - name: proxy
           image: kiamol/ch07-simple-proxy
           env:
-            - name: Proxy__Port
+            - name: Proxy__Port # 애플리케이션의 네트워크 요청을 라우팅
               value: "1080"
-            - name: Proxy__Request__UriMap__Source
+            - name: Proxy__Request__UriMap__Source # 이런 URL 매핑에 따라서 요청을 라우팅함
               value: http://localhost/api
             - name: Proxy__Request__UriMap__Target
               value: http://numbers-api/sixeyed/kiamol/master/ch03/numbers/rng
