@@ -25,3 +25,6 @@ spec:
           ports:
             - containerPort: 8080
               name: http
+# kubectl exec deploy/sleep -c sleep -n multi-container -- ps
+# 위의 명령을 통해서 확인해보면 모든 컨테이너의 프로세스를 확인할 수 있다.
+# 위의 매니페스트를 배치하기 전과 후를 비교하면 명확함
