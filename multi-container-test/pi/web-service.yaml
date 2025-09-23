@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-web
+  namespace: multi-container-test
+  labels:
+    kiamol: ch07-lab
+spec:
+  ports:
+    - port: 8070
+      targetPort: 80
+      name: http
+  selector:
+    app: pi-web
+  type: LoadBalancer
