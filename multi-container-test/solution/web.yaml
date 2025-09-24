@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pi-web
+  namespace: multi-container-test
+  labels:
+    kiamol: ch07-lab
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pi-web
+  template:
+    metadata:
+      labels:
+        app: pi-web
+    spec:
+      initContainers:
+        - name: set
+          image: kiamol/ch03-sleep
+          command: ["sh", "-c", "echo 'dotnet Pi.Web.dll -m web' > /config/startup.sh; chmod +x /config/startup.sh"]
+          volumeMounts:
+            - mountPath: /config
+              name: config-dir
+      containers:
+        - image: kiamol/ch05-pi
+          command: ["sh", "-c", "/init/startup.sh"]
+          name: web
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - mountPath: /init
+              readOnly: true
+              name: config-dir
+      volumes:
+        - name: config-dir
+          emptyDir: { }
