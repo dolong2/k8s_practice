@@ -33,6 +33,12 @@ spec:
             - mountPath: /init
               readOnly: true
               name: config-dir
+        - name: version
+          image: kiamol/ch03-sleep
+          command: [ 'sh', '-c', "while true; do echo -e 'HTTP/1.1 200 OK\nContent-Type: application/json\nContent-Length: 18\n\n{\"version\": \"V1\"}' | nc -l -p 8080; done" ]
+          ports:
+            - containerPort: 8080
+              name: http
       volumes:
         - name: config-dir
           emptyDir: { }
