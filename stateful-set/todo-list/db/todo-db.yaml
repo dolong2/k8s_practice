@@ -6,10 +6,10 @@ metadata:
   labels:
     kiamol: ch08
 spec:
-  selector:
+  selector: # 스테이트풀셋에도 셀렉터가 사용됨
     matchLabels:
       app: todo-db
-  serviceName: todo-db
+  serviceName: todo-db # 스테이트풀셋은 연결된 서비스가 필요함
   replicas: 2
   template:
     metadata:
