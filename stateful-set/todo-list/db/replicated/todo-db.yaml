@@ -26,6 +26,23 @@ spec:
           volumeMounts:
             - name: scripts
               mountPath: "/scripts"
+        - name: initialize-replication
+          image: postgres:11.6-alpine
+          envFrom:
+            - configMapRef:
+                name: todo-db-env
+          env:
+            - name: PGPASSWORD   # used as replication password
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: todo-db-secret
+          command: [ '/scripts/initialize-replication.sh' ]
+          volumeMounts:
+            - name: scripts
+              mountPath: "/scripts"
+            - name: initdb
+              mountPath: /docker-entrypoint-initdb.d
       containers:
         - name: db
           image: postgres:11.6-alpine
