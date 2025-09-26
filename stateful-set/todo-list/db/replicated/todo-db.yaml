@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: todo-db
+  namespace: stateful-set
+  labels:
+    kiamol: ch08
+spec:
+  selector: # 스테이트풀셋에도 셀렉터가 사용됨
+    matchLabels:
+      app: todo-db
+  serviceName: todo-db # 스테이트풀셋은 연결된 서비스가 필요함
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: todo-db
+    spec:
+      initContainers:
+        - name: wait-service
+          image: kiamol/ch03-sleep
+          envFrom:
+            - configMapRef:
+                name: todo-db-env
+          command: [ '/scripts/wait-service.sh' ]
+          volumeMounts:
+            - name: scripts
+              mountPath: "/scripts"
+      containers:
+        - name: db
+          image: postgres:11.6-alpine
+          env:
+            - name: POSTGRES_PASSWORD_FILE
+              value: /secrets/postgres_password
+          volumeMounts:
+            - name: secret
+              mountPath: "/secrets"
+      volumes:
+        - name: secret
+          secret:
+            secretName: todo-db-secret
+            defaultMode: 0400
+            items:
+              - key: POSTGRES_PASSWORD
+                path: postgres_password
+        - name: scripts
+          configMap:
+            name: todo-db-scripts
+            defaultMode: 0555
