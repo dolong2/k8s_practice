@@ -74,3 +74,5 @@ spec:
             defaultMode: 0444
         - name: initdb
           emptyDir: { }
+# 서비스 이름으로 도메인 조회
+# kubectl exec -n stateful-set deploy/sleep -- sh -c 'nslookup todo-db | grep "^[^*]"'
