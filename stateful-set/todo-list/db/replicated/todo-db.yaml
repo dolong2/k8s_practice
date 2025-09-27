@@ -76,3 +76,5 @@ spec:
           emptyDir: { }
 # 서비스 이름으로 도메인 조회
 # kubectl exec -n stateful-set deploy/sleep -- sh -c 'nslookup todo-db | grep "^[^*]"'
+# 특정 파드에 대한 도메인 조회
+# kubectl exec -n stateful-set deploy/sleep -- sh -c 'nslookup todo-db-0.todo-db.default.svc.cluster.local | grep "^[^*]"'
