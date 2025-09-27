@@ -39,8 +39,12 @@ spec:
                   name: todo-db-secret
           command: [ '/scripts/initialize-replication.sh' ]
           volumeMounts:
+            - name: secret
+              mountPath: "/secrets"
             - name: scripts
               mountPath: "/scripts"
+            - name: config
+              mountPath: "/conf"
             - name: initdb
               mountPath: /docker-entrypoint-initdb.d
       containers:
@@ -64,3 +68,9 @@ spec:
           configMap:
             name: todo-db-scripts
             defaultMode: 0555
+        - name: config
+          configMap:
+            name: todo-db-config
+            defaultMode: 0444
+        - name: initdb
+          emptyDir: { }
