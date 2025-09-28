@@ -46,3 +46,9 @@ spec:
         resources:
           requests:
             storage: 5Mi
+# 파드 0의 PVC 마운트에 데이터 기록
+# kubectl exec -n stateful-set sleep-with-pvc-0 -- sh -c 'echo Pod 0 > /data/pod.txt'
+# 파드 0에서 데이터 조회
+# kubectl exec -n stateful-set sleep-with-pvc-0 -- cat  /data/pod.txt
+# 파드 1에서 데이터 조회 -> 안되는게 정상
+# kubectl exec -n stateful-set sleep-with-pvc-1 -- cat  /data/pod.txt
