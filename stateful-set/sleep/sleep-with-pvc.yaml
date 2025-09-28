@@ -36,11 +36,11 @@ spec:
               mountPath: /data
   volumeClaimTemplates:
     - metadata:
-        name: data
+        name: data # 파드 볼륨의 이름
         namespace: stateful-set
         labels:
           kiamol: ch08
-      spec:
+      spec: # PVC 정의
         accessModes:
           - ReadWriteOnce
         resources:
