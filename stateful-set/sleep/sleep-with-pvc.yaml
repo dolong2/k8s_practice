@@ -21,7 +21,7 @@ spec:
   selector:
     matchLabels:
       app: sleep-with-pvc
-  serviceName: sleep-with-pvc
+  serviceName: sleep-with-pvc # 연결할 서비스 이름
   replicas: 2
   template:
     metadata:
