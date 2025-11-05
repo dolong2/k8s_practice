@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-web-config
+  namespace: stateful-set
+  labels:
+    kiamol: ch08
+data:
+  config.json: |-
+    {
+      "ConfigController": {
+        "Enabled" : true
+      },
+      "Database" : {
+        "Provider" : "Postgres"
+      }
+    }
